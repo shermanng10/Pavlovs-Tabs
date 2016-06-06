@@ -17,7 +17,8 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["output/content.js"]
+      "js": ["output/content.js"],
+      "css" : ["css/main.css"]
     }
   ],
   "author": "Sherman Ng",

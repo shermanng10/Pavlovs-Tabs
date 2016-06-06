@@ -1,0 +1,12 @@
+#gif_overlay {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	z-index: 99999999999;
+}
+
+#gif {
+	display: block;
+    margin-left: auto;
+    margin-right: auto; 
+}
