@@ -5,6 +5,6 @@ function setGIF(gifUrl){
  								</div>`
 };
 
-console.log('hi there')
-chrome.runtime.onMessage.addListener((message, sender, sendReponse) => { console.log(message["gifUrl"]); setGIF(message["gifUrl"]);})
 
+chrome.runtime.sendMessage({ready: "ready"});
+chrome.runtime.onMessage.addListener((message, sender, sendReponse) => { console.log(message["gifUrl"]); setGIF(message["gifUrl"]);})

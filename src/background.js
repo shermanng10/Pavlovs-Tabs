@@ -32,7 +32,14 @@ function getGIF(newTab){
 			let response = JSON.parse(xhr.response)
 			let data = response["data"]
 			randomGifUrl = data[Math.floor(Math.random()*data.length)]["images"]["downsized_large"]["url"]
-			chrome.tabs.onUpdated.addListener(tabReadyListener);
+			chrome.runtime.onMessage.addListener(
+				(request, sender, sendResponse) => {
+					if (request.ready == "ready") {
+						console.log('in the on message')
+						chrome.tabs.sendMessage(newTabId, { gifUrl: randomGifUrl });
+					}
+				}
+			)
     	}
 	}
 }
