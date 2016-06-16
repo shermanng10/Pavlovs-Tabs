@@ -10,18 +10,18 @@ function checkTabs(){
 			}
 			removeTabs(tabIds)
 		}
-	});
+	})
 }
 
 function createGifTab(){
-	chrome.tabs.create({}, function(tab) {
+	chrome.tabs.create({}, tab => {
 		newTabId = tab.id;
 		getGIF()
 	})
 }
 
 function addGifToDOM(url){
-	chrome.tabs.insertCSS(newTabId, {file: 'css/main.css', runAt: "document_end"}, function(){
+	chrome.tabs.insertCSS(newTabId, {file: 'css/main.css', runAt: "document_end"}, () => {
 		chrome.tabs.executeScript(newTabId, {
 			code: "document.body.innerHTML += \"<div id='gif_overlay'> <img id='gif' src= '"+url+"' alt='Bye GIF'> </div>\"",
 			runAt: "document_end"
@@ -50,5 +50,5 @@ function getGIF(){
 
 chrome.tabs.onCreated.addListener(() => {
 	checkTabs()
-});
+})
 
