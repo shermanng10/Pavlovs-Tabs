@@ -1,4 +1,5 @@
 let newTabId;
+let shouldFire = true;
 
 function checkTabs(){
 	chrome.tabs.query({currentWindow: true}, tabs => {
@@ -25,13 +26,16 @@ function addGifToDOM(url){
 		chrome.tabs.executeScript(newTabId, {
 			code: "document.body.innerHTML += \"<div id='gif_overlay'> <img id='gif' src= '"+url+"' alt='Bye GIF'> </div>\"",
 			runAt: "document_end"
-		})
+		}, () => { shouldFire = true })
 	})
 }
 
 function removeTabs(tabIds){
 	chrome.tabs.remove(tabIds)
-	createGifTab()
+	if (shouldFire){
+		shouldFire = false;
+		createGifTab()
+	}
 }
 
 function getGIF(){
