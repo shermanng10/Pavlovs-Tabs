@@ -14,16 +14,9 @@
     "scripts": ["output/background.js"],
     "persistent": false
   },
-  "content_scripts": [
-    {
-      "matches": ["http://*/*", "https://*/*"],
-      "js": ["output/content.js"],
-      "css" : ["css/main.css"]
-    }
-  ],
   "author": "Sherman Ng",
   "permissions": [
-     "tabs"
+     "tabs", "http://*/*", "https://*/*"
   ]
 }
 
