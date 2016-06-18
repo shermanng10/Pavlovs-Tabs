@@ -1,41 +1,14 @@
 let newTabId;
 let shouldFire = true;
 
-function checkTabs(){
-	chrome.tabs.query({currentWindow: true}, tabs => {
-		let tabCount = tabs.length;
-		let tabIds = [];
-		if (tabCount > 15) {
-			for (let x = 0; x < tabCount/2; x++){
-				tabIds.push(tabs[x].id)
-			}
-			removeTabs(tabIds)
-		}
-	})
-}
-
-function createGifTab(){
-	chrome.tabs.create({}, tab => {
-		newTabId = tab.id;
-		getGIF()
-	})
-}
 
 function addGifToDOM(url){
 	chrome.tabs.insertCSS(newTabId, {file: 'css/main.css', runAt: "document_end"}, () => {
 		chrome.tabs.executeScript(newTabId, {
-			code: "document.body.innerHTML += \"<div id='gif_overlay'> <img id='gif' src= '"+url+"' alt='Bye GIF'> </div>\"",
+			code: "document.body.innerHTML += \"<div id='gif_overlay'> <div id='gif_header'> Say bye to your tabs!</div> <img id='gif' src= '"+url+"' alt='Bye GIF'> </div>\"",
 			runAt: "document_end"
 		}, () => { shouldFire = true })
 	})
-}
-
-function removeTabs(tabIds){
-	chrome.tabs.remove(tabIds)
-	if (shouldFire){
-		shouldFire = false;
-		createGifTab()
-	}
 }
 
 function getGIF(){
@@ -50,6 +23,34 @@ function getGIF(){
 			addGifToDOM(randomGifUrl)
     	}
 	}
+}
+
+function createGifTab(){
+	chrome.tabs.create({}, tab => {
+		newTabId = tab.id;
+		getGIF()
+	})
+}
+
+function removeTabs(tabIds){
+	chrome.tabs.remove(tabIds)
+	if (shouldFire){
+		shouldFire = false;
+		createGifTab()
+	}
+}
+
+function checkTabs(){
+	chrome.tabs.query({currentWindow: true}, tabs => {
+		let tabCount = tabs.length;
+		let tabIds = [];
+		if (tabCount > 15) {
+			for (let x = 0; x < tabCount/2; x++){
+				tabIds.push(tabs[x].id)
+			}
+			removeTabs(tabIds)
+		}
+	})
 }
 
 chrome.tabs.onCreated.addListener(() => {

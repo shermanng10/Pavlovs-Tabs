@@ -1,5 +1,6 @@
 #gif_overlay {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
@@ -11,4 +12,10 @@
     overflow-x: hidden;
 	position: fixed;
 	z-index: 99999999999;
+}
+
+#gif_header {
+	color: white;
+	font-size: 3em;
+	margin-bottom: 1em;
 }
