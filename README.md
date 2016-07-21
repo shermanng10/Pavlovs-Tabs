@@ -1,6 +1,5 @@
-# TabKiller
-Chrome extension that kills tabs when too many are opened in one window. Creates a new tab with a "bye" gif from giphy signaling tabs have been closed.
+# Pavlov's Tabs
+Chrome extension that kills half of your tabs when too many are opened in one window. Creates a new window with a "bye" gif from giphy signaling that half of existing tabs have been closed. 
 
-Future iterations:
-- Remove least used tabs first.
-- Create a page where one can view recently killed tabs.
+Created to make myself more cognizant of my tab usage.
+
